@@ -1,0 +1,1 @@
+delete from  tblcitymst where CityId=@CityId

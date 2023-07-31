@@ -1,0 +1,1 @@
+delete from TblCollegeMst where CollegeId=@CollegeId

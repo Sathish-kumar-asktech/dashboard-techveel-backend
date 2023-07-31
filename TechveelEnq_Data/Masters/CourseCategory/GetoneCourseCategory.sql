@@ -1,0 +1,2 @@
+select CourseCategoryId,
+Course_Category from TblCourseCategoryMst where CourseCategoryId=@CourseCategoryId

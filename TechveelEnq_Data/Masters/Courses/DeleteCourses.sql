@@ -1,0 +1,1 @@
+delete from  TblCourseMst where CourseId=@CourseId
