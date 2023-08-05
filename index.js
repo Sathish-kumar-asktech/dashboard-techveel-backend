@@ -12,12 +12,7 @@ const CourseCategoryRoute = require("./TechveelEnq_Route/MasterRoute/CourseCateg
 const Courses = require("./TechveelEnq_Route/MasterRoute/CourseRoute");
 
 ///trasaction
-
-const EnquiryRoute = require('./TechveelEnq_Route/TransactionRoute/EnquiryRoute');
-
-
-
-
+const EnquiryRoute = require("./TechveelEnq_Route/TransactionRoute/EnquiryRoute");
 
 const app = express();
 app.use(cors());
@@ -31,11 +26,9 @@ app.use("/api", TermsNConditionsRoute.TechveelEnq_Route);
 app.use("/api", DegreeRoute.TechveelEnq_Route);
 app.use("/api", CourseCategoryRoute.TechveelEnq_Route);
 app.use("/api", Courses.TechveelEnq_Route);
-
-
+app.use("/api", Courses.TechveelEnq_Route);
 ///trasaction
 app.use("/api", EnquiryRoute.TechveelEnq_Route);
-
 
 app.listen(config.port, () => {
   console.log("app listening on url http://localhost:" + config.port);

@@ -23,7 +23,7 @@ function verifytoken(req, res, next) {
   }
 }
 
-router.get("/GetAllCity", verifytoken, CityController.GetAllCity);
+router.get("/GetAllCity", CityController.GetAllCity);
 router.get("/GetOneCity/:id", verifytoken, CityController.GetOneCity);
 router.post("/InsertCity", verifytoken, CityController.InsertCity);
 router.put("/UpdateCity/:id", verifytoken, CityController.UpdateCity);

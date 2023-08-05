@@ -16,6 +16,10 @@ SslcPer,
 SslcPassedout,
 HscPer,
 HscPassedout,
+UGPer,
+UGPassedOut,
+PGPer,
+PGPassedOut,
 PerferenceMode,
 PerferenceDay,
 PerferenceTiming,
@@ -26,12 +30,5 @@ WorkingIndustry,
 WorkingCompany,
 ReferenceBy,
 ReferenceContactNumber
-
-
-
-
-
-
-
 From
 TblStudentEnquiry where EnquiryId=@EnquiryId
