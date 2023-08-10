@@ -1,0 +1,1 @@
+DELETE FROM TblStudentAdmission where AdmissionId =@AdmissionId 

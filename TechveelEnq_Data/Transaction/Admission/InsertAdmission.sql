@@ -2,35 +2,52 @@ If Exists(
   Select
    PhoneNumber,Email
   From
-    TblStudentEnquiry
+    TblStudentAdmission
   Where
     PhoneNumber = @PhoneNumber or Email = @Email
 ) Begin Raiserror(50001, 16, 3) Return
 End
 else begin
 
-Insert Into TblStudentEnquiry
+Insert Into TblStudentAdmission
 (
-EnquiryNo,
-FirstName,
-LastName,
+	AdmissionNo,
+	-- basic information
+	FirstName,
+	LastName,
 	FatherName,
 	Dob,
 	Gender,
 	GraduationType,
 	PhoneNumber,
 	Email,
-	CityId,
+	
+	-- education details
 	CollegeId,
 	DegreeId,
 	SslcPer,
 	SslcPassedout,
 	HscPer,
 	HscPassedout,
-UGPer,
-UGPassedOut,
-PGPer,
-PGPassedOut,
+	UGPer,
+	UGPassedOut,
+	PGPer,
+	PGPassedOut,
+
+	-- address information
+	Address1,
+	Address2,
+	CityId,
+	StateId,
+	ZipCode,
+
+	-- documents
+	doc1,
+	doc2,
+	doc3,
+	doc4,
+
+    -- other details
 	PerferenceMode,
 	PerferenceDay,
 	PerferenceTiming,
@@ -41,21 +58,23 @@ PGPassedOut,
 	WorkingCompany,
 	ReferenceBy,
 	ReferenceContactNumber,
+	DiscountAmount,
+	NetAmount,
 	CreatedBy,
 	CreatedDate
 )
 values 
 (
-'Techveel',
-@FirstName,
-@LastName,
-@FatherName,
-@Dob,
+	'Techveel-Admisson',
+	@FirstName,
+	@LastName,
+	@FatherName,
+	@Dob,
 	@Gender,
 	@GraduationType,
 	@PhoneNumber,
 	@Email,
-	@CityId,
+
 	@CollegeId,
 	@DegreeId,
 	@SslcPer,
@@ -66,6 +85,18 @@ values
 	@UGPassedOut,
 	@PGPer,
 	@PGPassedOut,
+	
+	@Address1,
+	@Address2,	
+	@CityId,
+	@StateId,
+	@ZipCode,
+
+	@doc1,
+	@doc2,
+	@doc3,
+	@doc4,
+	
 	@PerferenceMode,
 	@PerferenceDay,
 	@PerferenceTiming,
@@ -76,9 +107,10 @@ values
 	@WorkingCompany,
 	@ReferenceBy,
 	@ReferenceContactNumber,
+	@DiscountAmount,
+	@NetAmount,
 	@CreatedBy,
 	Getdate()
 )
-
-SELECT SCOPE_IDENTITY() AS EnquiryId
+SELECT SCOPE_IDENTITY() AS AdmissionId
 End

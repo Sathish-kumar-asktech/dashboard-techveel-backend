@@ -1,0 +1,48 @@
+Update TblStudentAdmission
+
+SET 
+FirstName = @FirstName, 
+LastName = @LastName, 
+FatherName = @FatherName, 
+Dob = @Dob, 
+Gender = @Gender, 
+GraduationType = @GraduationType, 
+PhoneNumber = @PhoneNumber, 
+Email = @Email,
+
+Address1=@Address1,
+Address2=@Address2,
+StateId =@StateId,
+CityId = @CityId,
+ZipCode =ZipCode,
+
+doc1 =@doc1,
+doc2 =@doc2,
+doc3 =@doc3,
+doc4 = @doc4,
+
+CollegeId = @CollegeId, 
+DegreeId = @DegreeId, 
+SslcPer = @SslcPer, 
+SslcPassedout = @SslcPassedout, 
+HscPer = @HscPer, 
+HscPassedout = @HscPassedout, 
+UGPer = @UGPer, 
+UGPassedOut = @UGPassedOut, 
+PGPer = @PGPer, 
+PGPassedOut = @PGPassedOut, 
+PerferenceMode = @PerferenceMode, 
+PerferenceDay = @PerferenceDay, 
+PerferenceTiming = @PerferenceTiming, 
+CourseId = @CourseId, 
+CourseTechnologyId = @CourseTechnologyId, 
+WorkingStatus = @WorkingStatus, 
+WorkingIndustry = @WorkingIndustry, 
+WorkingCompany = @WorkingCompany, 
+ReferenceBy = @ReferenceBy, 
+ReferenceContactNumber = @ReferenceContactNumber,
+DiscountAmount = @DiscountAmount,
+NetAmount = @NetAmount, 
+Modifyby = @Modifyby, 
+ModifyDate = Getdate()
+WHERE AdmissionId = @AdmissionId
