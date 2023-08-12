@@ -112,7 +112,7 @@ const UpdateAdmission = async ( Admissiondata,doc1,doc2,doc3,doc4) => {
       .input("Address1", sql.VarChar(250), Admissiondata.Address1)
       .input("Address2", sql.VarChar(250), Admissiondata.Address2)
       .input("CityId", sql.BigInt, Admissiondata.CityId)
-      .input("StateId", sql.BigInt, Admissiondata.stateId)
+      .input("StateId", sql.BigInt, Admissiondata.StateId)
       .input("ZipCode", sql.VarChar(10), Admissiondata.ZipCode)
       .input("doc1", sql.VarChar(100),doc1)
       .input("doc2", sql.VarChar(100),doc2)

@@ -13,4 +13,4 @@ select
 from
   TblCollegeMst as tclg
   left join TblStateMst as ts on ts.StateId = tclg.StateId
-  left join tblcitymst as tc on tc.CityId = tclg.CityId
+  left join tblcitymst as tc on tc.CityId = tclg.CityId order by tclg.CollegeId desc

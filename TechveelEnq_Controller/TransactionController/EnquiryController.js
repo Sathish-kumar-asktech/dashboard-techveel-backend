@@ -10,6 +10,16 @@ const getAllEnquiry = async (req, res, next) => {
   }
 };
 
+const GetallEnquiryforAdmission = async (req, res, next) => {
+  try {
+    // const Enquiry = req.body;
+    const Enquirylist = await EnquiryData.GetallEnquiryforAdmission();
+    res.send(Enquirylist);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 const GetoneEnquiry = async (req, res, next) => {
   try {
     const Enquiryid = req.params.id;
@@ -54,6 +64,7 @@ const DeleteEnquiry = async (req, res, next) => {
 
 module.exports = {
   getAllEnquiry: getAllEnquiry,
+  GetallEnquiryforAdmission: GetallEnquiryforAdmission,
   GetoneEnquiry: GetoneEnquiry,
   InsertEnquiry: InsertEnquiry,
   UpdateEnquiry: UpdateEnquiry,

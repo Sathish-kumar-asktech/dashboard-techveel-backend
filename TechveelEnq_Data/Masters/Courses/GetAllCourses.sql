@@ -9,4 +9,4 @@ from
 TblCourseMst as tc 
 left join 
 TblCourseCategoryMst as tcc on 
-tc.CourseCategoryId = tcc.CourseCategoryId
+tc.CourseCategoryId = tcc.CourseCategoryId  order by tc.CourseId desc

@@ -1,4 +1,3 @@
 select StateId,
 StateName
-
-from tblstatemst
+from tblstatemst order by StateId desc

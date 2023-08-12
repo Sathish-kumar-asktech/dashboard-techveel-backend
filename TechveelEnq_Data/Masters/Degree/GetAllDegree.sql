@@ -2,4 +2,4 @@ select DegreeId,
 DegreeName,
 DegreeType
 --CollegeId
-from TblDegreeMst
+from TblDegreeMst  order by DegreeId desc

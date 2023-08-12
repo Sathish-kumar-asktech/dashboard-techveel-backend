@@ -50,16 +50,16 @@ const InsertEnquiry = async (Enquirydata) => {
   }
 };
 
-// const getAllEnquiry = async () => {
-//   try {
-//     let pool = await sql.connect(config.sql);
-//     const sqlQueries = await utils.loadSqlQueries("Masters/Enquiry");
-//     const GetEnquries = await pool.request().query(sqlQueries.GetallEnquiry);
-//     return GetEnquries.recordset;
-//   } catch (error) {
-//     return error.message;
-//   }
-// };
+const GetallEnquiryforAdmission = async () => {
+  try {
+    let pool = await sql.connect(config.sql);
+    const sqlQueries = await utils.loadSqlQueries("Transaction/Enquiry");
+    const GetEnquries = await pool.request().query(sqlQueries.GetallEnquiryforAdmission);
+    return GetEnquries.recordset;
+  } catch (error) {
+    return error.message;
+  }
+};
 
 const getAllEnquiry = async (Enquirydata) => {
   try {
@@ -162,6 +162,7 @@ const DeleteEnquiry = async (EnquiryId) => {
 module.exports = {
   InsertEnquiry: InsertEnquiry,
   getAllEnquiry: getAllEnquiry,
+  GetallEnquiryforAdmission:GetallEnquiryforAdmission,
   GetOneEnquiry: GetOneEnquiry,
   UpdateEnquiry: UpdateEnquiry,
   DeleteEnquiry: DeleteEnquiry,

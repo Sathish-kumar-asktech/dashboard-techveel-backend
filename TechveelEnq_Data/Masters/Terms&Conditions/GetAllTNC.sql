@@ -1,4 +1,3 @@
 select TCId,
 TermsConditions
-
-from TblTermsConditionsMst
+from TblTermsConditionsMst order by TCId desc;

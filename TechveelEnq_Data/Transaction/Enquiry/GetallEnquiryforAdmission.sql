@@ -40,5 +40,3 @@ FROM
     LEFT JOIN tbldegreemst d ON se.DegreeId = d.DegreeId
     LEFT JOIN tblcoursemst ct ON se.CourseTechnologyId = ct.CourseId
     LEFT JOIN TblCourseCategoryMst tech ON se.CourseId = tech.CourseCategoryId
-
-where  convert (Varchar(10), se.CreatedDate,112) between @FromDate and @ToDate order by se.EnquiryId desc
