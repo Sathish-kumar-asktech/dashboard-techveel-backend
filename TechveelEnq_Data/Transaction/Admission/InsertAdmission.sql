@@ -61,7 +61,8 @@ Insert Into TblStudentAdmission
 	DiscountAmount,
 	NetAmount,
 	CreatedBy,
-	CreatedDate
+	CreatedDate,
+	EnquiryId
 )
 values 
 (
@@ -110,7 +111,8 @@ values
 	@DiscountAmount,
 	@NetAmount,
 	@CreatedBy,
-	Getdate()
+	Getdate(),
+	@EnquiryId
 )
 SELECT SCOPE_IDENTITY() AS AdmissionId
 End

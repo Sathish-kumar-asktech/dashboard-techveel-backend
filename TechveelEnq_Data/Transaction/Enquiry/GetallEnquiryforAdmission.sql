@@ -40,3 +40,4 @@ FROM
     LEFT JOIN tbldegreemst d ON se.DegreeId = d.DegreeId
     LEFT JOIN tblcoursemst ct ON se.CourseTechnologyId = ct.CourseId
     LEFT JOIN TblCourseCategoryMst tech ON se.CourseId = tech.CourseCategoryId
+   where   EnquiryId not in (select EnquiryId from TblStudentAdmission)

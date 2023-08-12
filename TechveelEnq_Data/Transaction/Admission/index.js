@@ -3,7 +3,7 @@ const config = require("../../../Config");
 
 const sql = require("mssql");
 
-const InsertAdmission = async (Admissiondata,doc1,doc2,doc3,doc4) => {
+const InsertAdmission = async (Admissiondata, doc1, doc2, doc3, doc4) => {
   try {
     let pool = await sql.connect(config.sql);
     const sqlQueries = await utils.loadSqlQueries("Transaction/Admission");
@@ -22,10 +22,10 @@ const InsertAdmission = async (Admissiondata,doc1,doc2,doc3,doc4) => {
       .input("CityId", sql.BigInt, Admissiondata.CityId)
       .input("StateId", sql.BigInt, Admissiondata.StateId)
       .input("ZipCode", sql.VarChar(10), Admissiondata.ZipCode)
-      .input("doc1", sql.VarChar(100),doc1)
-      .input("doc2", sql.VarChar(100),doc2)
-      .input("doc3", sql.VarChar(100),doc3)
-      .input("doc4", sql.VarChar(100),doc4)
+      .input("doc1", sql.VarChar(100), doc1)
+      .input("doc2", sql.VarChar(100), doc2)
+      .input("doc3", sql.VarChar(100), doc3)
+      .input("doc4", sql.VarChar(100), doc4)
       .input("CollegeId", sql.BigInt, Admissiondata.CollegeId)
       .input("DegreeId", sql.BigInt, Admissiondata.DegreeId)
       .input("SslcPer", sql.Numeric(18, 4), Admissiondata.SslcPer)
@@ -57,6 +57,7 @@ const InsertAdmission = async (Admissiondata,doc1,doc2,doc3,doc4) => {
         Admissiondata.ReferenceContactNumber
       )
       .input("CreatedBy", sql.BigInt, Admissiondata.CreatedBy)
+      .input("EnquiryId", sql.BigInt, Admissiondata.EnquiryId)
       .query(sqlQueries.InsertAdmission);
     return insertEvent.recordset;
   } catch (error) {
@@ -94,13 +95,13 @@ const GetOneAdmission = async (AdmissionId) => {
   }
 };
 
-const UpdateAdmission = async ( Admissiondata,doc1,doc2,doc3,doc4) => {
+const UpdateAdmission = async (Admissiondata, doc1, doc2, doc3, doc4) => {
   try {
     let pool = await sql.connect(config.sql);
     const sqlQueries = await utils.loadSqlQueries("Transaction/Admission");
     const UpdateEvent = await pool
       .request()
-      .input("AdmissionId", sql.BigInt,Admissiondata.AdmissionId)
+      .input("AdmissionId", sql.BigInt, Admissiondata.AdmissionId)
       .input("FirstName", sql.VarChar(50), Admissiondata.FirstName)
       .input("LastName", sql.VarChar(50), Admissiondata.LastName)
       .input("FatherName", sql.VarChar(50), Admissiondata.FatherName)
@@ -114,10 +115,10 @@ const UpdateAdmission = async ( Admissiondata,doc1,doc2,doc3,doc4) => {
       .input("CityId", sql.BigInt, Admissiondata.CityId)
       .input("StateId", sql.BigInt, Admissiondata.StateId)
       .input("ZipCode", sql.VarChar(10), Admissiondata.ZipCode)
-      .input("doc1", sql.VarChar(100),doc1)
-      .input("doc2", sql.VarChar(100),doc2)
-      .input("doc3", sql.VarChar(100),doc3)
-      .input("doc4", sql.VarChar(100),doc4)
+      .input("doc1", sql.VarChar(100), doc1)
+      .input("doc2", sql.VarChar(100), doc2)
+      .input("doc3", sql.VarChar(100), doc3)
+      .input("doc4", sql.VarChar(100), doc4)
       .input("CollegeId", sql.BigInt, Admissiondata.CollegeId)
       .input("DegreeId", sql.BigInt, Admissiondata.DegreeId)
       .input("SslcPer", sql.Numeric(18, 4), Admissiondata.SslcPer)
@@ -149,7 +150,6 @@ const UpdateAdmission = async ( Admissiondata,doc1,doc2,doc3,doc4) => {
         Admissiondata.ReferenceContactNumber
       )
       .input("Modifyby", sql.BigInt, Admissiondata.Modifyby)
-
       .query(sqlQueries.UpdateAdmission);
     return UpdateEvent.recordset;
   } catch (error) {
