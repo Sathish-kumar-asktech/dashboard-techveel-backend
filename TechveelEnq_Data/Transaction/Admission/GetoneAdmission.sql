@@ -1,44 +1,69 @@
-select 
-AdmissionId,
-AdmissionNo,
-FirstName,
-LastName,
-FatherName,
-Dob,
-Gender,
-GraduationType,
-PhoneNumber,
-Email,
-CityId,
-Address1,
-Address2,
-StateId,
-ZipCode,
-doc1,
-doc2,
-doc3,
-doc4,
-DiscountAmount,
-NetAmount,
-CollegeId,
-DegreeId,
-SslcPer,
-SslcPassedout,
-HscPer,
-HscPassedout,
-UGPer,
-UGPassedOut,
-PGPer,
-PGPassedOut,
-PerferenceMode,
-PerferenceDay,
-PerferenceTiming,
-CourseId,
-CourseTechnologyId,
-WorkingStatus,
-WorkingIndustry,
-WorkingCompany,
-ReferenceBy,
-ReferenceContactNumber
-From
-TblStudentAdmission where AdmissionId=@AdmissionId
+SELECT
+    se.AdmissionId ,
+    se.AdmissionNo ,
+
+    -- basic information
+    se.FirstName,
+    se.LastName,
+    se.FatherName,
+    se.Dob,
+    se.Gender,
+    se.GraduationType,
+    se.PhoneNumber,
+    se.Email,
+    
+    -- education details
+    se.CollegeId,
+    clg.CollegeName,
+    se.DegreeId,     
+    d.DegreeName,
+    se.SslcPer,
+    se.SslcPassedout,
+    se.HscPer,
+    se.HscPassedout,
+    se.UGPer,
+    se.UGPassedOut,
+    se.PGPer,
+    se.PGPassedOut,
+    
+    -- address information
+    se.Address1,
+    se.Address2,
+    se.CityId,
+    cm.CityName,
+    se.StateId,
+    sm.StateName,
+    se.ZipCode,
+    
+    -- documents
+    se.doc1,
+    se.doc2,
+    se.doc3,
+    se.doc4,
+    
+    -- other details
+    se.PerferenceMode,
+    se.PerferenceDay,
+    se.PerferenceTiming,
+    se.CourseId,
+    ct.Course_Name, 
+    se.CourseTechnologyId,
+    tech.Course_Category, 
+    se.WorkingStatus,
+    se.WorkingIndustry,
+    se.WorkingCompany,
+    se.ReferenceBy,
+    se.ReferenceContactNumber,
+    se.CreatedDate,
+    se.DiscountAmount,
+    se.NetAmount  
+FROM
+    TblStudentAdmission se
+    LEFT JOIN tblcitymst cm ON se.CityId = cm.CityId
+    LEFT JOIN tblstatemst sm ON se.StateId  = sm.StateId 
+    LEFT JOIN TblCollegeMst clg ON se.CollegeId = clg.CollegeId
+    LEFT JOIN tbldegreemst d ON se.DegreeId = d.DegreeId
+    LEFT JOIN tblcoursemst ct ON se.CourseTechnologyId = ct.CourseId
+    LEFT JOIN TblCourseCategoryMst tech ON se.CourseId = tech.CourseCategoryId
+
+where AdmissionId=@AdmissionId

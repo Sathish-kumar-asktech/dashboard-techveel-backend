@@ -1,5 +1,5 @@
 const utils = require('../../Utill');
-const config = require('../../../config');
+const config = require('../../../Config');
 
 const sql = require('mssql');
 

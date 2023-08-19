@@ -80,6 +80,19 @@ const getAllAdmission = async (Admissiondata) => {
   }
 };
 
+const GetallAdmissionForPayment = async (Admissiondata) => {
+  try {
+    let pool = await sql.connect(config.sql);
+    const sqlQueries = await utils.loadSqlQueries("Transaction/Admission");
+    const GetAdmissions = await pool
+      .request()     
+      .query(sqlQueries.GetallAdmissionForPayment);
+    return GetAdmissions.recordset;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 const GetOneAdmission = async (AdmissionId) => {
   try {
     let pool = await sql.connect(config.sql);
@@ -175,6 +188,7 @@ const DeleteAdmission = async (AdmissionId) => {
 module.exports = {
   InsertAdmission: InsertAdmission,
   getAllAdmission: getAllAdmission,
+  GetallAdmissionForPayment:GetallAdmissionForPayment,
   GetOneAdmission: GetOneAdmission,
   UpdateAdmission: UpdateAdmission,
   DeleteAdmission: DeleteAdmission,

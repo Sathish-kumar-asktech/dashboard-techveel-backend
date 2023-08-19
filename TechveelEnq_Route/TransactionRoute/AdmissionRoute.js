@@ -212,16 +212,12 @@ router.get(
   verifytoken,
   AdmissionController.GetoneAdmission
 );
-// router.post(
-//   "/InsertAdmission",
-//   verifytoken,
-//   AdmissionController.InsertAdmission
-// // );
-// router.put(
-//   "/UpdateAdmission/:id",
-//   verifytoken,
-//   AdmissionController.UpdateAdmission
-// );
+
+router.get(
+  "/GetallAdmissionForPayment",
+  verifytoken,
+  AdmissionController.GetallAdmissionForPayment
+);
 router.delete(
   "/deleteAdmission/:id",
   verifytoken,
