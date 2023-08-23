@@ -25,6 +25,7 @@ function verifytoken(req, res, next) {
 
 router.post("/GetAllEnquiry", verifytoken, EnquiryController.getAllEnquiry);
 router.get("/GetallEnquiryforAdmission", verifytoken, EnquiryController.GetallEnquiryforAdmission);
+router.get("/GetallEnquiryForMIS", verifytoken, EnquiryController.GetallEnquiryForMIS);
 router.get("/GetOneEnquiry/:id", verifytoken, EnquiryController.GetoneEnquiry);
 router.post("/InsertEnquiry", verifytoken, EnquiryController.InsertEnquiry);
 router.put("/UpdateEnquiry/:id", verifytoken, EnquiryController.UpdateEnquiry);

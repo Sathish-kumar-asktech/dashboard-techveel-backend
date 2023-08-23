@@ -202,6 +202,11 @@ router.post(
   verifytoken,
   AdmissionController.getAllAdmission
 );
+router.get(
+  "/GetallAdmissionForMIS",
+  verifytoken,
+  AdmissionController.GetallAdmissionForMIS
+);
 router.put(
   "/GetAllAdmission",
   verifytoken,
@@ -212,7 +217,6 @@ router.get(
   verifytoken,
   AdmissionController.GetoneAdmission
 );
-
 router.get(
   "/GetallAdmissionForPayment",
   verifytoken,

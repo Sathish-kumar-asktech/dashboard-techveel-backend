@@ -93,6 +93,17 @@ const GetallAdmissionForPayment = async (Admissiondata) => {
   }
 };
 
+const GetallAdmissionForMIS = async () => {
+  try {
+    let pool = await sql.connect(config.sql);
+    const sqlQueries = await utils.loadSqlQueries("Transaction/Admission");
+    const GetAdmissions = await pool.request().query(sqlQueries.GetallAdmissionForMIS);
+    return GetAdmissions.recordset;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 const GetOneAdmission = async (AdmissionId) => {
   try {
     let pool = await sql.connect(config.sql);
@@ -189,6 +200,7 @@ module.exports = {
   InsertAdmission: InsertAdmission,
   getAllAdmission: getAllAdmission,
   GetallAdmissionForPayment:GetallAdmissionForPayment,
+  GetallAdmissionForMIS:GetallAdmissionForMIS,
   GetOneAdmission: GetOneAdmission,
   UpdateAdmission: UpdateAdmission,
   DeleteAdmission: DeleteAdmission,

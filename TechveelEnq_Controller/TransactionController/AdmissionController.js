@@ -19,6 +19,14 @@ const GetallAdmissionForPayment = async (req, res, next) => {
   }
 };
 
+const GetallAdmissionForMIS = async (req, res, next) => {
+  try {
+    const Admissionlist = await AdmissionData.GetallAdmissionForMIS();
+    res.send(Admissionlist);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
 
 const GetoneAdmission = async (req, res, next) => {
   try {
@@ -66,6 +74,7 @@ const DeleteAdmission = async (req, res, next) => {
 module.exports = {
   getAllAdmission: getAllAdmission,
   GetallAdmissionForPayment:GetallAdmissionForPayment,
+  GetallAdmissionForMIS:GetallAdmissionForMIS,
   GetoneAdmission: GetoneAdmission,
   InsertAdmission: InsertAdmission,
   UpdateAdmission: UpdateAdmission,

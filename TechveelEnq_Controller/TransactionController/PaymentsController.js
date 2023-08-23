@@ -30,6 +30,26 @@ const GetOnePaymentHistory = async (req, res, next) => {
   }
 };
 
+const GetallPaymentsForMIS = async (req, res, next) => {
+  try {
+    // const Enquiry = req.body;
+    const PaymentsDatas = await PaymentsData.GetallPaymentsForMIS();
+    res.send(PaymentsDatas);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+const GetallPaymentsForMISProfileWise = async (req, res, next) => {
+  try {
+    // const Enquiry = req.body;
+    const PaymentsDatas = await PaymentsData.GetallPaymentsForMISProfileWise();
+    res.send(PaymentsDatas);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 
 const GetoneAdmisisonDetails = async (req, res, next) => {
   try {
@@ -78,6 +98,8 @@ module.exports = {
   GetonePayments: GetonePayments,
   GetOnePaymentHistory:GetOnePaymentHistory,
   GetoneAdmisisonDetails:GetoneAdmisisonDetails,
+  GetallPaymentsForMISProfileWise:GetallPaymentsForMISProfileWise,
+  GetallPaymentsForMIS:GetallPaymentsForMIS,
   InsertPayments: InsertPayments,
   UpdatePayments: UpdatePayments,
   DeletePayments: DeletePayments,

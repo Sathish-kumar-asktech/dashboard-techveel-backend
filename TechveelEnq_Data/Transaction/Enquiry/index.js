@@ -61,6 +61,17 @@ const GetallEnquiryforAdmission = async () => {
   }
 };
 
+const GetallEnquiryForMIS = async () => {
+  try {
+    let pool = await sql.connect(config.sql);
+    const sqlQueries = await utils.loadSqlQueries("Transaction/Enquiry");
+    const GetEnquries = await pool.request().query(sqlQueries.GetallEnquiryForMIS);
+    return GetEnquries.recordset;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 const getAllEnquiry = async (Enquirydata) => {
   try {
     let pool = await sql.connect(config.sql);
@@ -163,6 +174,7 @@ module.exports = {
   InsertEnquiry: InsertEnquiry,
   getAllEnquiry: getAllEnquiry,
   GetallEnquiryforAdmission:GetallEnquiryforAdmission,
+  GetallEnquiryForMIS:GetallEnquiryForMIS,
   GetOneEnquiry: GetOneEnquiry,
   UpdateEnquiry: UpdateEnquiry,
   DeleteEnquiry: DeleteEnquiry,

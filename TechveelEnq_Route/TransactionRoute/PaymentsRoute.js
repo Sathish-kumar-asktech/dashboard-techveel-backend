@@ -27,6 +27,8 @@ router.post("/GetAllPayments", verifytoken, PaymentsController.getAllPayments);
 router.get("/GetOnePayments/:id", verifytoken, PaymentsController.GetonePayments);
 router.get("/GetOnePaymentHistory/:id", verifytoken, PaymentsController.GetOnePaymentHistory);
 router.get("/GetoneAdmisisonDetails/:id", verifytoken, PaymentsController.GetOnePaymentHistory);
+router.get("/GetallPaymentsForMIS", verifytoken, PaymentsController.GetallPaymentsForMIS);
+router.get("/GetallPaymentsForMISProfileWise", verifytoken, PaymentsController.GetallPaymentsForMISProfileWise);
 router.post("/InsertPayments", verifytoken, PaymentsController.InsertPayments);
 router.put("/UpdatePayments/:id", verifytoken, PaymentsController.UpdatePayments);
 router.delete("/deletePayments/:id",verifytoken,PaymentsController.DeletePayments);

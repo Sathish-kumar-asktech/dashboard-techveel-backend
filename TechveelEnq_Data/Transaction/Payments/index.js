@@ -68,6 +68,29 @@ const GetOnePaymentHistory = async (admissionID) => {
   }
 };
 
+
+const GetallPaymentsForMIS = async () => {
+  try {
+    let pool = await sql.connect(config.sql);
+    const sqlQueries = await utils.loadSqlQueries("Transaction/Payments");
+    const GetPayments = await pool.request().query(sqlQueries.GetallPaymentsForMIS);
+    return GetPayments.recordset;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+const GetallPaymentsForMISProfileWise = async () => {
+  try {
+    let pool = await sql.connect(config.sql);
+    const sqlQueries = await utils.loadSqlQueries("Transaction/Payments");
+    const GetPayments = await pool.request().query(sqlQueries.GetallPaymentsForMISProfileWise);
+    return GetPayments.recordset;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 const GetoneAdmisisonDetails = async (admissionID) => {
   try {
     let pool = await sql.connect(config.sql);
@@ -121,6 +144,8 @@ module.exports = {
   GetOnePayment: GetOnePayment,
   GetOnePaymentHistory:GetOnePaymentHistory,
   GetoneAdmisisonDetails:GetoneAdmisisonDetails,
+  GetallPaymentsForMISProfileWise:GetallPaymentsForMISProfileWise,
+  GetallPaymentsForMIS:GetallPaymentsForMIS,
   UpdatePayment: UpdatePayment,
   DeletePayment: DeletePayment,
 };
