@@ -1,4 +1,11 @@
 const PaymentsData = require("../../TechveelEnq_Data/Transaction/Payments");
+var numeral = require("numeral");
+const pdfcreater = require("html-pdf");
+const ejs = require("ejs");
+const moment = require("moment");
+var fs = require("fs");
+const { ToWords } = require("to-words");
+const toWords = new ToWords();
 
 const getAllPayments = async (req, res, next) => {
   try {
@@ -22,7 +29,7 @@ const GetonePayments = async (req, res, next) => {
 
 const GetOnePaymentHistory = async (req, res, next) => {
   try {
-    const  Admissionid = req.params.id;
+    const Admissionid = req.params.id;
     const AdmissionOne = await PaymentsData.GetOnePaymentHistory(Admissionid);
     res.send(AdmissionOne);
   } catch (error) {
@@ -50,10 +57,9 @@ const GetallPaymentsForMISProfileWise = async (req, res, next) => {
   }
 };
 
-
 const GetoneAdmisisonDetails = async (req, res, next) => {
   try {
-    const  Admissionid = req.params.id;
+    const Admissionid = req.params.id;
     const AdmissionOne = await PaymentsData.GetoneAdmisisonDetails(Admissionid);
     res.send(AdmissionOne);
   } catch (error) {
@@ -93,14 +99,48 @@ const DeletePayments = async (req, res, next) => {
   }
 };
 
+const GetPaymentPrintData = async (req, res, next) => {
+  try {
+
+    const PaymentId = req.params.id;
+    const PaymentData = await PaymentsData.GetPaymentPrintData(
+      PaymentId
+    );
+    console.log(PaymentData)
+
+    res.render(
+      "PaymentReceipt",
+      {
+        moment,
+        toWords,
+        numeral,
+        PaymentData
+      },
+      function (err, html) {
+        pdfcreater
+          .create(html)
+          .toFile("./views/PaymentReceipt.pdf", (err) => {
+            if (err) {
+              res.send(Promise.reject());
+            }
+            res.send(Promise.resolve());
+          });
+      }
+    );
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 module.exports = {
   getAllPayments: getAllPayments,
   GetonePayments: GetonePayments,
-  GetOnePaymentHistory:GetOnePaymentHistory,
-  GetoneAdmisisonDetails:GetoneAdmisisonDetails,
-  GetallPaymentsForMISProfileWise:GetallPaymentsForMISProfileWise,
-  GetallPaymentsForMIS:GetallPaymentsForMIS,
+  GetOnePaymentHistory: GetOnePaymentHistory,
+  GetoneAdmisisonDetails: GetoneAdmisisonDetails,
+  GetallPaymentsForMISProfileWise: GetallPaymentsForMISProfileWise,
+  GetallPaymentsForMIS: GetallPaymentsForMIS,
   InsertPayments: InsertPayments,
   UpdatePayments: UpdatePayments,
   DeletePayments: DeletePayments,
+  GetPaymentPrintData: GetPaymentPrintData
 };

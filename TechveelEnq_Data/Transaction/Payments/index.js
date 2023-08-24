@@ -138,6 +138,20 @@ const DeletePayment = async (PaymentId) => {
   }
 };
 
+const GetPaymentPrintData = async (PaymentId) => {
+  try {
+    let pool = await sql.connect(config.sql);
+    const sqlQueries = await utils.loadSqlQueries("Transaction/Payments");
+    const GetoneAdmisisonDetails = await pool
+      .request()
+      .input("PaymentId", sql.BigInt, PaymentId)
+      .query(sqlQueries.GetPaymentReceiptData);
+    return GetoneAdmisisonDetails.recordset;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 module.exports = {
   InsertPayment: InsertPayment,
   getAllPayment: getAllPayment,
@@ -148,4 +162,5 @@ module.exports = {
   GetallPaymentsForMIS:GetallPaymentsForMIS,
   UpdatePayment: UpdatePayment,
   DeletePayment: DeletePayment,
+  GetPaymentPrintData: GetPaymentPrintData
 };

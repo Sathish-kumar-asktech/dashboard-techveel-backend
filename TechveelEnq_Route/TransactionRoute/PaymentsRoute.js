@@ -32,6 +32,7 @@ router.get("/GetallPaymentsForMISProfileWise", verifytoken, PaymentsController.G
 router.post("/InsertPayments", verifytoken, PaymentsController.InsertPayments);
 router.put("/UpdatePayments/:id", verifytoken, PaymentsController.UpdatePayments);
 router.delete("/deletePayments/:id",verifytoken,PaymentsController.DeletePayments);
+router.get("/GetPaymentPrint/:id", verifytoken, PaymentsController.GetPaymentPrintData);
 
 module.exports = {
   TechveelEnq_Route: router,

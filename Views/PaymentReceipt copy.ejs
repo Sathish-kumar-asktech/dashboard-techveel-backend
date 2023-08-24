@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Receipt</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      * {
+        font-family: "Times New Roman", Times, serif;
+      }
+      .titles {
+        font-weight: 600;
+      }
+      .section {
+        border: 1px solid #000;
+      }
+      .section2 {
+        font-size: 13px;
+        padding: 4px;
+      }
+      .section3 {
+        font-size: 14px;
+        padding: 2px;
+      }
+
+      .text-size {
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="receipt m-1 col" style="width: 557.37px">
+      <div class="row-1">
+        <div class="text-center mb-2">
+          <h5 class="mb-0 text-center">Payment Receipt</h5>
+        </div>
+      </div>
+
+      <% PaymentData.forEach(data => { %>
+      <div class="section border border-dark">
+        <div class="row-3 border border-dark p-2">
+          <div class="row">
+            <div class="col-2 d-flex align-items-center">
+              <img
+                src="https://techveel.com/wp-content/uploads/2021/10/png_20220816_173511_00001.png"
+                alt="Company Logo"
+                class="img-fluid"
+                style="object-fit: cover"
+              />
+            </div>
+
+            <div class="col-10 text-center">
+              <p class="text-size">
+                <span class="titles">TECHVEEL</span><br />
+                36, Railway Station border Road, Kodambakkam, Chennai -
+                600024,<br />
+                Tamil Nadu, India, GSTIN No: 33APIPM4941D2Z1, Web Site:
+                techveel.com, <br />
+                Mobile No: 9840899559, Email: enquiry@techveel.com <br />
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="row no-gutters">
+            <div class="col-6">
+              <div class="border border-dark px-2 text-md-end">
+                <p class="m-0 section2">Payment ID: <%= data.PaymentId %></p>
+                <p class="m-0 section2">
+                  Payment Number: <%= data.PaymentNo %>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="border border-dark px-2 text-md-end">
+                <p class="m-0 section2">
+                  Payment Date: <%= new
+                  Date(data.PaymentDate).toISOString().split('T')[0] %>
+                </p>
+
+                <p class="m-0 section2">
+                  Payment Time: <%= new
+                  Date(data.PaymentDate).toISOString().split('T')[1].substr(0,
+                  8) %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="col p-3">
+            <div class="row-8">
+              <p>Received from : <%= data.FirstName %> <%= data.LastName %></p>
+              <p>
+                For: <%= data.Course_Category %>(<%= data.Course_Name %>) - <%=
+                data.Course_Duration %>
+              </p>
+              <p>Course Fee: ₹ <%= data.CourseFee %></p>
+              <p>
+                The Sum of : <%= toWords.convert(data.PaidAmount, {currency:
+                true}) %>
+              </p>
+              <p>Paid Amount: ₹ <%= data.PaidAmount %></p>
+              <p>Remarks: <%= data.Remarks %></p>
+              
+              <p class="section2" style="font-weight: 600">
+                <span style="font-weight: 600">Note : </span> Payment cannot be
+                refund in any reason once is paid
+              </p>
+
+              <hr />
+
+              <div class="row mt-2">
+                <div class="col-6 text-start">
+                  <p class="section3 text-start">Administrator</p>
+                  <h5 class="section3 text-start"><b>Prepared by</b></h5>
+                </div>
+                <div class="col-6 text-end">
+                  <p class="section3"><br /></p>
+                  <h5 class="section3 text-end pr-3" style="text-align: right;"><b>Received by</b></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <% }) %>
+    </div>
+  </body>
+</html>

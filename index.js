@@ -25,6 +25,10 @@ app.use(bodyParser.json());
 app.use(express.static('Public'))
 app.use('/api/AdmissionDocs', express.static('Public/AdmissionDocs'))
 
+app.get('/api/GetPaymentReceipt',  (req, res) => {
+  res.sendFile(`${__dirname}/views/PaymentReceipt.pdf`)
+})
+
 app.use("/api", ContactRoute.TechveelEnq_Route);
 app.use("/api", CityRoute.TechveelEnq_Route);
 app.use("/api", CollegeRoute.TechveelEnq_Route);
