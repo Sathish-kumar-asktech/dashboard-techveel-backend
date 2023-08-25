@@ -3,7 +3,7 @@ SET
 -- Admissionid = @Admissionid, 
 -- PayType = @PayType, 
 -- PayMode = @PayMode, 
-PaymentDate = @PaymentDate, 
+-- PaymentDate = @PaymentDate, 
 PaidAmount = @PaidAmount, 
 Remarks = @Remarks, 
 BalanceOnDate = @BalanceOnDate,

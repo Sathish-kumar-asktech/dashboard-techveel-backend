@@ -112,7 +112,7 @@ const UpdatePayment = async (PaymentId, Paymentdata) => {
     const UpdateEvent = await pool
       .request()      
       .input("PaymentId", sql.BigInt, PaymentId)
-      .input("PaymentDate", sql.SmallDateTime, Paymentdata.PaymentDate)
+      // .input("PaymentDate", sql.SmallDateTime, Paymentdata.PaymentDate)
       .input("PaidAmount", sql.Numeric(18,4), Paymentdata.PaidAmount)
       .input("Remarks", sql.VarChar(500), Paymentdata.Remarks)
       .input("BalanceOnDate", sql.Numeric(18,4), Paymentdata.BalanceOnDate)  
