@@ -17,6 +17,7 @@ values
 	@PayType,
 	@PayMode,
 	@PaymentDate,
+	-- CONVERT(datetime, @PaymentDate, 120), 
 	@PaidAmount,
 	@BalanceOnDate,
 	@prevBalance,

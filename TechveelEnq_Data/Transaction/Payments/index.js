@@ -3,19 +3,29 @@ const config = require("../../../Config");
 
 const sql = require("mssql");
 
+const momentp = require("moment");
+const moment = require("moment-timezone");
+
 const InsertPayment = async (Paymentdata) => {
   try {
     let pool = await sql.connect(config.sql);
+    
+    // Parse the frontend datetime string in UTC
+    const frontendUtcDatetime = moment.utc(Paymentdata.PaymentDate, 'YYYY-MM-DDTHH:mm:ss[Z]').toDate();
+
+    // Convert to backend timezone (Asia/Kolkata)
+    const backendPaymentDate = moment.tz(frontendUtcDatetime, 'Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
+
     const sqlQueries = await utils.loadSqlQueries("Transaction/Payments");
     const insertEvent = await pool
       .request()
       .input("Admissionid", sql.BigInt, Paymentdata.Admissionid)
       .input("PayType", sql.VarChar(10), Paymentdata.PayType)
       .input("PayMode", sql.VarChar(50), Paymentdata.PayMode)
-      .input("PaymentDate", sql.SmallDateTime, Paymentdata.PaymentDate)
-      .input("PaidAmount", sql.Numeric(18,4), Paymentdata.PaidAmount)
-      .input("BalanceOnDate", sql.Numeric(18,4), Paymentdata.BalanceOnDate) 
-      .input("prevBalance", sql.Numeric(18,4), Paymentdata.prevBalance)            
+      .input("PaymentDate", sql.SmallDateTime, backendPaymentDate)
+      .input("PaidAmount", sql.Numeric(18, 4), Paymentdata.PaidAmount)
+      .input("BalanceOnDate", sql.Numeric(18, 4), Paymentdata.BalanceOnDate)
+      .input("prevBalance", sql.Numeric(18, 4), Paymentdata.prevBalance)
       .input("Remarks", sql.VarChar(500), Paymentdata.Remarks)
       .input("CreatedBy", sql.BigInt, Paymentdata.CreatedBy)
       .query(sqlQueries.InsertPayments);
@@ -68,12 +78,13 @@ const GetOnePaymentHistory = async (admissionID) => {
   }
 };
 
-
 const GetallPaymentsForMIS = async () => {
   try {
     let pool = await sql.connect(config.sql);
     const sqlQueries = await utils.loadSqlQueries("Transaction/Payments");
-    const GetPayments = await pool.request().query(sqlQueries.GetallPaymentsForMIS);
+    const GetPayments = await pool
+      .request()
+      .query(sqlQueries.GetallPaymentsForMIS);
     return GetPayments.recordset;
   } catch (error) {
     return error.message;
@@ -84,7 +95,9 @@ const GetallPaymentsForMISProfileWise = async () => {
   try {
     let pool = await sql.connect(config.sql);
     const sqlQueries = await utils.loadSqlQueries("Transaction/Payments");
-    const GetPayments = await pool.request().query(sqlQueries.GetallPaymentsForMISProfileWise);
+    const GetPayments = await pool
+      .request()
+      .query(sqlQueries.GetallPaymentsForMISProfileWise);
     return GetPayments.recordset;
   } catch (error) {
     return error.message;
@@ -110,12 +123,12 @@ const UpdatePayment = async (PaymentId, Paymentdata) => {
     let pool = await sql.connect(config.sql);
     const sqlQueries = await utils.loadSqlQueries("Transaction/Payments");
     const UpdateEvent = await pool
-      .request()      
+      .request()
       .input("PaymentId", sql.BigInt, PaymentId)
       // .input("PaymentDate", sql.SmallDateTime, Paymentdata.PaymentDate)
-      .input("PaidAmount", sql.Numeric(18,4), Paymentdata.PaidAmount)
+      .input("PaidAmount", sql.Numeric(18, 4), Paymentdata.PaidAmount)
       .input("Remarks", sql.VarChar(500), Paymentdata.Remarks)
-      .input("BalanceOnDate", sql.Numeric(18,4), Paymentdata.BalanceOnDate)  
+      .input("BalanceOnDate", sql.Numeric(18, 4), Paymentdata.BalanceOnDate)
       .input("ModifyedBy", sql.BigInt, Paymentdata.ModifyedBy)
       .query(sqlQueries.UpdatePayments);
     return UpdateEvent.recordset;
@@ -156,11 +169,11 @@ module.exports = {
   InsertPayment: InsertPayment,
   getAllPayment: getAllPayment,
   GetOnePayment: GetOnePayment,
-  GetOnePaymentHistory:GetOnePaymentHistory,
-  GetoneAdmisisonDetails:GetoneAdmisisonDetails,
-  GetallPaymentsForMISProfileWise:GetallPaymentsForMISProfileWise,
-  GetallPaymentsForMIS:GetallPaymentsForMIS,
+  GetOnePaymentHistory: GetOnePaymentHistory,
+  GetoneAdmisisonDetails: GetoneAdmisisonDetails,
+  GetallPaymentsForMISProfileWise: GetallPaymentsForMISProfileWise,
+  GetallPaymentsForMIS: GetallPaymentsForMIS,
   UpdatePayment: UpdatePayment,
   DeletePayment: DeletePayment,
-  GetPaymentPrintData: GetPaymentPrintData
+  GetPaymentPrintData: GetPaymentPrintData,
 };

@@ -27,4 +27,4 @@ FROM
     LEFT JOIN TblCourseCategoryMst tech ON adm.CourseId = tech.CourseCategoryId
 
 WHERE se.Admissionid = @Admissionid 
--- order by se.PaymentId desc
+order by se.PaymentId asc
