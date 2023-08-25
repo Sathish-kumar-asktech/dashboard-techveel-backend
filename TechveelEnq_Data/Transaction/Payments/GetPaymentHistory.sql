@@ -7,12 +7,12 @@ SELECT
     se.PaidAmount,
     se.Remarks,
     se.prevBalance,
-    se.BalanceOnDate,        
+    se.BalanceOnDate,
+    adm.NetAmount as OfferedFee,        
     SUM(se.PaidAmount) OVER (PARTITION BY se.Admissionid) AS TotalPaidAmount,
-
+    adm.NetAmount - SUM(se.PaidAmount) OVER (PARTITION BY se.Admissionid) AS BalanceFee,
     adm.FirstName,
     adm.LastName,
-
     adm.CourseId,
     ct.Course_Name,
     ct.Course_Fee,
@@ -26,4 +26,5 @@ FROM
     LEFT JOIN tblcoursemst ct ON adm.CourseTechnologyId = ct.CourseId
     LEFT JOIN TblCourseCategoryMst tech ON adm.CourseId = tech.CourseCategoryId
 
-WHERE se.Admissionid = @Admissionid order by se.PaymentId desc
+WHERE se.Admissionid = @Admissionid 
+-- order by se.PaymentId desc

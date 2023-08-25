@@ -16,7 +16,6 @@ FROM
     LEFT JOIN TblCourseCategoryMst tech ON adm.CourseId = tech.CourseCategoryId
 WHERE
     se.Admissionid = @Admissionid
-
 GROUP BY
     se.Admissionid,
     adm.FirstName,

@@ -5,10 +5,13 @@ SELECT
     adm.CourseId,
     ct.Course_Name,
     ct.Course_Fee,
-    adm.NetAmount,
+    adm.NetAmount,    
+    adm.NetAmount as OfferedFee,
     tech.Course_Category,
     SUM(se.PaidAmount) AS TotalPaidAmount,
-    MAX(se.CreatedDate) AS LastPaymentDate
+    MAX(se.CreatedDate) AS LastPaymentDate,    
+    MAX(se.CreatedDate) AS PaymentDate,        
+	(adm.NetAmount) - (SUM(se.PaidAmount)) as BalanceFee
 FROM
     TblStudentPayment se    
     LEFT JOIN TblStudentAdmission adm ON se.Admissionid = adm.AdmissionId

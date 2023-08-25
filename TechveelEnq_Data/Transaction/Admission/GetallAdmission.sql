@@ -1,6 +1,7 @@
 SELECT
     se.AdmissionId ,
-    se.AdmissionNo ,
+    se.AdmissionNo ,    
+    se.CreatedDate as AdmissionDate,
 
     -- basic information
     se.FirstName,
@@ -51,8 +52,11 @@ SELECT
     se.ReferenceBy,
     se.ReferenceContactNumber,
     se.CreatedDate,
-    se.DiscountAmount,
-    se.NetAmount  
+    se.DiscountAmount,    
+    ct.Course_Fee,
+    se.NetAmount,    
+    se.EnquiryId,
+    enq.CreatedDate as EnquiryDate  
 FROM
     TblStudentAdmission se
     LEFT JOIN tblcitymst cm ON se.CityId = cm.CityId
@@ -60,6 +64,7 @@ FROM
     LEFT JOIN TblCollegeMst clg ON se.CollegeId = clg.CollegeId
     LEFT JOIN tbldegreemst d ON se.DegreeId = d.DegreeId
     LEFT JOIN tblcoursemst ct ON se.CourseTechnologyId = ct.CourseId
-    LEFT JOIN TblCourseCategoryMst tech ON se.CourseId = tech.CourseCategoryId
+    LEFT JOIN TblCourseCategoryMst tech ON se.CourseId = tech.CourseCategoryId   
+    LEFT JOIN TblStudentEnquiry enq ON se.EnquiryId = enq.EnquiryId
 
 where  convert (Varchar(10), se.CreatedDate,112) between @FromDate and @ToDate  order by se.AdmissionId desc
